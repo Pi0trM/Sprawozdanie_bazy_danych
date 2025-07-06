@@ -51,8 +51,9 @@ Logiczny
 
 .. schemat ERD, np. w notacji Barkera
 
-.. image:: diagramy/barker_erd.png
-	:alt: Schemat ERD w notacji Barkera
+.. figure:: diagramy/barker_erd.png
+	
+	Schemat ERD w notacji Barkera
 
 .. normalizacja
 

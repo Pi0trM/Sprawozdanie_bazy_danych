@@ -8,7 +8,7 @@ Encje i ich atrybuty:
 
 - Kandydat:
 	
-	- PESEL - PK (klucz podstawowy),
+	- PESEL - PK (klucz główny),
 	
 	- imie,
 	
@@ -42,36 +42,40 @@ Związki:
 
 - Aplikacja - Wydział (N:1).
 
-Aplikacja jest encją słabą, nie posiada własnego klucza. Jest identyfikowana na podstawie encji Kandydat, od której zależy jej istnienie.
+Aplikacja jest encją słabą, nie posiada własnego klucza. Jest identyfikowana na podstawie encji Kandydat, od której zależy jej istnienie. Przyjmujemy, że każdy kandydat składa tylko jedną aplikację.
 
 .. przedstawić w notacji Chena
 
 Logiczny
 ^^^^^^^^
 
-.. schemat ERD, np. w notacji Barkera
-
 .. figure:: diagramy/barker_erd.png
 	
 	Schemat ERD w notacji Barkera
 
-.. normalizacja
-
 Tabela przed normalizacją:
 
-	Rekrutacja - (Pesel... ) - wszystkie dane w jednej tabeli, wszystkie encje w jednej krotce
+	Rekrutacja - wszystkie dane w jednej tabeli, wszystkie encje w jednej krotce
 
 Model logiczny - pierwotna tabela zostaje podzielona na kilka innych połączonych kluczami. Tabele po normalizacji:
 
-	Kandydaci - Klucz główny - PESEL
+	Kandydaci - PESEL to klucz główny
 
-	Wydziały - Klucz główny - wydzial
+	Wydziały - IDwydzialu to klucz główny
 
-	Aplikacje - Klucz obcy - PESEL -> Kandydat(PESEL) - krotka: PESEL, wydzial, datarekrutacji, statusaplikacji
+	Aplikacje - PESEL jest kluczem zarówno głównym, jak i obcym, IDwydzialu to klucz obcy
+
+Jest to trzecia postać normalna, ponieważ:
+
+- dane są atomowe - każda komórka zawiera tylko jedną wartość (1NF)
+
+- wszystkie atrybuty niekluczowe są zależne od klucza potencjalnego (2NF),
+
+- nie ma zależności przechodnich (3NF).
 
 Fizyczny
 ^^^^^^^^
 
-implementacja z użyciem SQLite
+.. implementacja z użyciem SQLite
 
-z użyciem PostgreSQL
+.. z użyciem PostgreSQL

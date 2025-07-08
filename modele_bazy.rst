@@ -53,16 +53,16 @@ Logiczny
 	
 	Schemat ERD w notacji Barkera
 
-Tabela przed normalizacją:
+Tabela przed normalizacją
 
 	Rekrutacja - wszystkie dane w jednej tabeli, wszystkie encje w jednej krotce
 
 Model logiczny - pierwotna tabela zostaje podzielona na kilka innych połączonych kluczami. Tabele po normalizacji:
 
 	Kandydaci - PESEL to klucz główny
-
+	
 	Wydziały - IDwydzialu to klucz główny
-
+	
 	Aplikacje - PESEL jest kluczem zarówno głównym, jak i obcym, IDwydzialu to klucz obcy
 
 Jest to trzecia postać normalna, ponieważ:
@@ -76,6 +76,63 @@ Jest to trzecia postać normalna, ponieważ:
 Fizyczny
 ^^^^^^^^
 
-.. implementacja z użyciem SQLite
+Implementacja z użyciem SQLite:
 
-.. z użyciem PostgreSQL
+.. code-block:: sql
+
+	CREATE TABLE Kandydat (
+	    PESEL TEXT PRIMARY KEY,
+	    imie TEXT NOT NULL,
+	    nazwisko TEXT NOT NULL,
+	    kodpocztowy TEXT,
+	    telefon TEXT
+	);
+	
+	CREATE TABLE Wydzial (
+	    IDwydzialu INTEGER PRIMARY KEY,
+	    nazwawydzialu TEXT NOT NULL
+	);
+	
+	CREATE TABLE Aplikacja (
+	    PESEL TEXT,
+	    IDwydzialu INTEGER,
+	    datarekrutacji TEXT NOT NULL,
+	    sredniamaturalna REAL,
+	    statusaplikacji TEXT,
+	
+	    PRIMARY KEY (PESEL),
+	    FOREIGN KEY (PESEL) REFERENCES Kandydat(PESEL),
+	    FOREIGN KEY (IDwydzialu) REFERENCES Wydzial(IDwydzialu)
+	);
+
+Z użyciem PostgreSQL:
+
+.. code-block:: sql
+
+	CREATE TABLE Kandydat (
+	    PESEL CHAR(11) PRIMARY KEY,
+	    imie VARCHAR(100) NOT NULL,
+	    nazwisko VARCHAR(100) NOT NULL,
+	    kodpocztowy CHAR(6),
+	    telefon VARCHAR(20)
+	);
+	
+	CREATE TABLE Wydzial (
+	    IDwydzialu SERIAL PRIMARY KEY,
+	    nazwawydzialu VARCHAR(255) NOT NULL
+	);
+	
+	CREATE TABLE Aplikacja (
+	    PESEL CHAR(11),
+	    IDwydzialu INTEGER,
+	    datarekrutacji DATE NOT NULL,
+	    sredniamaturalna NUMERIC(4, 2),
+	    statusaplikacji VARCHAR(30),
+	
+	    PRIMARY KEY (PESEL),
+	    FOREIGN KEY (PESEL) REFERENCES Kandydat(PESEL) ON DELETE CASCADE ON UPDATE CASCADE,
+	    FOREIGN KEY (IDwydzialu) REFERENCES Wydzial(IDwydzialu) ON DELETE RESTRICT ON UPDATE CASCADE
+	);
+
+Różnice między zastosowanymi typami danych wynikają z ograniczeń SQLite w zakresie wspieranych typów danych. SQLite nie wspiera również CASCADE.
+

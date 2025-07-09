@@ -8,7 +8,7 @@ Encje i ich atrybuty:
 
 - Kandydat:
 	
-	- PESEL - PK (klucz główny),
+	- pesel - PK (klucz główny),
 	
 	- imie,
 	
@@ -22,9 +22,9 @@ Encje i ich atrybuty:
 
 - Aplikacja:
 	
-	- PESEL - FK (klucz obcy),
+	- pesel - FK (klucz obcy),
 	
-	- IDwydzialu - FK,
+	- idwydzialu - FK,
 	
 	- datarekrutacji,
 
@@ -32,7 +32,7 @@ Encje i ich atrybuty:
 
 - Wydział:
 	
-	- IDwydzialu - PK
+	- idwydzialu - PK
 		
 	- nazwawydzialu.
 
@@ -59,11 +59,11 @@ Tabela przed normalizacją
 
 Model logiczny - pierwotna tabela zostaje podzielona na kilka innych połączonych kluczami. Tabele po normalizacji:
 
-	Kandydaci - PESEL to klucz główny
+	Kandydaci - pesel to klucz główny
 	
-	Wydziały - IDwydzialu to klucz główny
+	Wydziały - idwydzialu to klucz główny
 	
-	Aplikacje - PESEL jest kluczem zarówno głównym, jak i obcym, IDwydzialu to klucz obcy
+	Aplikacje - pesel jest kluczem zarówno głównym, jak i obcym, IDwydzialu to klucz obcy
 
 Jest to trzecia postać normalna, ponieważ:
 
@@ -81,7 +81,7 @@ Implementacja z użyciem SQLite:
 .. code-block:: sql
 
 	CREATE TABLE Kandydat (
-	    PESEL TEXT PRIMARY KEY,
+	    pesel TEXT PRIMARY KEY,
 	    imie TEXT NOT NULL,
 	    nazwisko TEXT NOT NULL,
 	    kodpocztowy TEXT,
@@ -90,19 +90,19 @@ Implementacja z użyciem SQLite:
 	);
 	
 	CREATE TABLE Wydzial (
-	    IDwydzialu INTEGER PRIMARY KEY,
+	    idwydzialu INTEGER PRIMARY KEY,
 	    nazwawydzialu TEXT NOT NULL
 	);
 	
 	CREATE TABLE Aplikacja (
-	    PESEL TEXT,
-	    IDwydzialu INTEGER,
+	    pesel TEXT,
+	    idwydzialu INTEGER,
 	    datarekrutacji TEXT NOT NULL,
 	    statusaplikacji TEXT,
 	
-	    PRIMARY KEY (PESEL),
-	    FOREIGN KEY (PESEL) REFERENCES Kandydat(PESEL),
-	    FOREIGN KEY (IDwydzialu) REFERENCES Wydzial(IDwydzialu)
+	    PRIMARY KEY (pesel),
+	    FOREIGN KEY (pesel) REFERENCES Kandydat(pesel),
+	    FOREIGN KEY (idwydzialu) REFERENCES Wydzial(idwydzialu)
 	);
 
 Z użyciem PostgreSQL:
@@ -110,7 +110,7 @@ Z użyciem PostgreSQL:
 .. code-block:: sql
 
 	CREATE TABLE Kandydat (
-	    PESEL CHAR(11) PRIMARY KEY,
+	    pesel CHAR(11) PRIMARY KEY,
 	    imie VARCHAR(100) NOT NULL,
 	    nazwisko VARCHAR(100) NOT NULL,
 	    kodpocztowy CHAR(6),
@@ -119,19 +119,19 @@ Z użyciem PostgreSQL:
 	);
 	
 	CREATE TABLE Wydzial (
-	    IDwydzialu SERIAL PRIMARY KEY,
+	    idwydzialu SERIAL PRIMARY KEY,
 	    nazwawydzialu VARCHAR(255) NOT NULL
 	);
 	
 	CREATE TABLE Aplikacja (
-	    PESEL CHAR(11),
-	    IDwydzialu INTEGER,
+	    pesel CHAR(11),
+	    idwydzialu INTEGER,
 	    datarekrutacji DATE NOT NULL,
 	    statusaplikacji VARCHAR(30),
 	
-	    PRIMARY KEY (PESEL),
-	    FOREIGN KEY (PESEL) REFERENCES Kandydat(PESEL) ON DELETE CASCADE ON UPDATE CASCADE,
-	    FOREIGN KEY (IDwydzialu) REFERENCES Wydzial(IDwydzialu) ON DELETE RESTRICT ON UPDATE CASCADE
+	    PRIMARY KEY (pesel),
+	    FOREIGN KEY (pesel) REFERENCES Kandydat(pesel) ON DELETE CASCADE ON UPDATE CASCADE,
+	    FOREIGN KEY (idwydzialu) REFERENCES Wydzial(idwydzialu) ON DELETE RESTRICT ON UPDATE CASCADE
 	);
 
 Różnice między zastosowanymi typami danych wynikają z ograniczeń SQLite w zakresie wspieranych typów danych. SQLite nie wspiera również CASCADE.

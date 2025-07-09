@@ -1,6 +1,8 @@
 Opis danych przechowywanych w bazie
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+W obu przypadkach rozmiar zbioru danych pozostaje taki sam; 300 kandydatów, 300 aplikacji (po jednej na kandydata) i 8 wydziałów. Każdy kandydat ma przypisaną średnią ocenę z egzaminów maturalnych.
+
 SQLite
 ^^^^^^
 

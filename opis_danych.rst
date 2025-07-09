@@ -28,7 +28,7 @@ Podsumowanie kandydatów na wydziałach:
 | Informatyka | 28                | 71.4                  |
 +-------------+-------------------+-----------------------+
 
-.. table:: diagramy/chart_sqlite.png
+.. image:: diagramy/chart_sqlite.png
 
 PostgreSQL
 ^^^^^^^^^^
@@ -56,5 +56,5 @@ Podsumowanie kandydatów na wydziałach:
 +-------------+-------------------+-----------------------+
 
 
-.. table:: diagramy/chart_postgresql.png
+.. image:: diagramy/chart_postgresql.png
 

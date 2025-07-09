@@ -28,7 +28,7 @@ Podsumowanie kandydatów na wydziałach:
 
 .. image:: diagramy/chart_sqlite.png
 	:width: 600
-	:height: 400
+	:height: 450
 
 PostgreSQL
 ^^^^^^^^^^
@@ -58,5 +58,5 @@ Podsumowanie kandydatów na wydziałach:
 
 .. image:: diagramy/chart_postgresql.png
 	:width: 600
-	:height: 400
+	:height: 450
 

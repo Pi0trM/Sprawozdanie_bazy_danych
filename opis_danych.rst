@@ -1,8 +1,6 @@
 Opis danych przechowywanych w bazie
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. podsumowanie/zaraportowanie danych zebranych w bazie danych
-
 SQLite
 ^^^^^^
 
@@ -29,6 +27,7 @@ Podsumowanie kandydatów na wydziałach:
 +-------------+-------------------+-----------------------+
 
 .. image:: diagramy/chart_sqlite.png
+	:scale: 30 %
 
 PostgreSQL
 ^^^^^^^^^^
@@ -57,4 +56,5 @@ Podsumowanie kandydatów na wydziałach:
 
 
 .. image:: diagramy/chart_postgresql.png
+	:scale: 30 %
 

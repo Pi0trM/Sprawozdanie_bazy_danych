@@ -85,7 +85,8 @@ Implementacja z użyciem SQLite:
 	    imie TEXT NOT NULL,
 	    nazwisko TEXT NOT NULL,
 	    kodpocztowy TEXT,
-	    telefon TEXT
+	    telefon TEXT,
+		sredniamaturalna REAL
 	);
 	
 	CREATE TABLE Wydzial (
@@ -97,8 +98,7 @@ Implementacja z użyciem SQLite:
 	    PESEL TEXT,
 	    IDwydzialu INTEGER,
 	    datarekrutacji TEXT NOT NULL,
-	    sredniamaturalna REAL,
-	    statusaplikacji TEXT,
+		statusaplikacji TEXT,
 	
 	    PRIMARY KEY (PESEL),
 	    FOREIGN KEY (PESEL) REFERENCES Kandydat(PESEL),
@@ -114,7 +114,8 @@ Z użyciem PostgreSQL:
 	    imie VARCHAR(100) NOT NULL,
 	    nazwisko VARCHAR(100) NOT NULL,
 	    kodpocztowy CHAR(6),
-	    telefon VARCHAR(20)
+	    telefon VARCHAR(20),
+		sredniamaturalna NUMERIC(4, 2)
 	);
 	
 	CREATE TABLE Wydzial (
@@ -126,8 +127,7 @@ Z użyciem PostgreSQL:
 	    PESEL CHAR(11),
 	    IDwydzialu INTEGER,
 	    datarekrutacji DATE NOT NULL,
-	    sredniamaturalna NUMERIC(4, 2),
-	    statusaplikacji VARCHAR(30),
+		statusaplikacji VARCHAR(30),
 	
 	    PRIMARY KEY (PESEL),
 	    FOREIGN KEY (PESEL) REFERENCES Kandydat(PESEL) ON DELETE CASCADE ON UPDATE CASCADE,
